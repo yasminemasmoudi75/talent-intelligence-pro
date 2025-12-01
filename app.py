@@ -287,11 +287,18 @@ with tab_analysis:
                 st.metric("Modèle", model_metrics.get('model_name', 'N/A'))
                 
             st.markdown("#### Matrice de Confusion")
-            cm = np.array(model_metrics.get('confusion_matrix', [[0,0],[0,0]]))
+            cm = np.array(model_metrics.get('confusion_matrix', [[0,0,0],[0,0,0],[0,0,0]]))
+            
+            # Déterminer les labels en fonction de la taille de la matrice
+            if cm.shape[0] == 3:
+                labels_classes = ['Faible', 'Moyen', 'Élevé']
+            else:
+                labels_classes = ['Non-Performant', 'Performant']
+            
             fig_cm = px.imshow(cm, text_auto=True, color_continuous_scale='Blues',
                               labels={'x': "Prédiction", 'y': "Réalité", 'color': "Nombre"},
-                              x=['Non-Performant', 'Performant'],
-                              y=['Non-Performant', 'Performant'])
+                              x=labels_classes,
+                              y=labels_classes)
             st.plotly_chart(fig_cm, use_container_width=True)
         else:
             st.warning("Les métriques du modèle ne sont pas disponibles (metrics.json introuvable).")
