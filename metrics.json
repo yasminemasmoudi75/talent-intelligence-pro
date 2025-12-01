@@ -1,0 +1,1 @@
+{"accuracy": 0.34831460674157305, "f1": 0.345760822369841, "confusion_matrix": [[49, 36, 38], [41, 42, 27], [48, 42, 33]], "model_name": "Decision Tree (GridSearch)"}
