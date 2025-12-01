@@ -289,7 +289,7 @@ with tab_analysis:
             st.markdown("#### Matrice de Confusion")
             cm = np.array(model_metrics.get('confusion_matrix', [[0,0],[0,0]]))
             fig_cm = px.imshow(cm, text_auto=True, color_continuous_scale='Blues',
-                              labels=dict(x="Prédiction", y="Réalité", color="Nombre"),
+                              labels={'x': "Prédiction", 'y': "Réalité", 'color': "Nombre"},
                               x=['Non-Performant', 'Performant'],
                               y=['Non-Performant', 'Performant'])
             st.plotly_chart(fig_cm, use_container_width=True)
