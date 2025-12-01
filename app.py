@@ -173,7 +173,7 @@ with st.sidebar:
         st.markdown(f"**Score Moyen:** {dataset['performance_score'].mean():.2f}")
     
     st.markdown("---")
-    st.markdown("Created with ❤️ by AI")
+   
 
 # --- Onglets Principaux ---
 tab_dashboard, tab_analysis, tab_prediction = st.tabs(["📊 Dashboard Global", "🔎 Analyse Approfondie", "🎯 Simulateur de Performance"])
