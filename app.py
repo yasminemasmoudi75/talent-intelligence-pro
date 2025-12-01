@@ -223,6 +223,58 @@ with tab_dashboard:
             </div>
             """, unsafe_allow_html=True)
 
+
+        st.markdown("---")
+        
+        # 🎯 SECTION: COMPARAISON DES MODÈLES
+        st.markdown("### 🏆 Comparaison des Modèles Testés")
+        st.markdown("Voici les performances de tous les algorithmes de Machine Learning testés pour ce projet :")
+        
+        # Données de tous les modèles (du fichier ANALYSE_PERFORMANCE_MODELES.md)
+        models_data = {
+            'Modèle': [
+                'Decision Tree (Optimisé)', 'Extra Trees (Optimisé)', 'Régression Logistique',
+                'Random Forest', 'K-Nearest Neighbors (Optimisé)', 'Gaussian Naive Bayes (Optimisé)',
+                'KNN (Version de base)', 'AdaBoost (Optimisé)', 'Gradient Boosting'
+            ],
+            'Accuracy (%)': [40.56, 36.11, 35.83, 35.56, 35.00, 34.72, 33.33, 31.94, 30.56],
+            'F1-Score (%)': [40.62, 36.02, 35.17, 35.39, 34.89, 33.66, 32.95, 22.65, 30.37],
+            'Statut': ['🥇 Gagnant', '🥈 2ème', '🥉 3ème', '4ème', '5ème', '6ème', '7ème', '8ème', '9ème']
+        }
+        
+        df_models = pd.DataFrame(models_data)
+        
+        # Affichage du tableau
+        col_table, col_chart = st.columns([1, 1])
+        
+        with col_table:
+            st.dataframe(df_models, use_container_width=True, hide_index=True)
+        
+        with col_chart:
+            # Graphique comparatif
+            fig_comparison = go.Figure()
+            fig_comparison.add_trace(go.Bar(
+                x=df_models['Modèle'],
+                y=df_models['Accuracy (%)'],
+                name='Accuracy',
+                marker_color='lightblue'
+            ))
+            fig_comparison.add_trace(go.Bar(
+                x=df_models['Modèle'],
+                y=df_models['F1-Score (%)'],
+                name='F1-Score',
+                marker_color='lightcoral'
+            ))
+            fig_comparison.update_layout(
+                title='Performance des Modèles',
+                xaxis_title='',
+                yaxis_title='Score (%)',
+                barmode='group',
+                xaxis_tickangle=-45,
+                height=400
+            )
+            st.plotly_chart(fig_comparison, use_container_width=True)
+        
         st.markdown("---")
         
         # Charts Row 1
